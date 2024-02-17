@@ -4,6 +4,7 @@ import com.project.model.def.Card;
 import com.project.model.enums.Bank;
 import com.project.model.enums.PaymentProcessingNetwork;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
@@ -55,7 +56,6 @@ public class CreditCard implements Card {
     @Column(name = "card_PIN_code")
     private Integer cardPINCode;
 
-    @NonNull
     @ManyToMany(mappedBy = "transactionId")
     private Set<Transaction> cardTransactionHistory;
 
@@ -71,5 +71,11 @@ public class CreditCard implements Card {
     @Column(name="credit_balance")
     private BigDecimal creditBalance;
 
+    @Column(name="credit_utilization")
+    private Double creditUtilization;
 
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "credit_history_id")
+    private CreditHistory creditCardHistory;
 }

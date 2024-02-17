@@ -20,5 +20,7 @@ public class AccountCredentials {
     @Column(name = "username")
     private String username;
 
-    private String password; //TODO -Needs hashing mechanism
+    @NotNull
+    @Column(name = "password")
+    private String password;
 }

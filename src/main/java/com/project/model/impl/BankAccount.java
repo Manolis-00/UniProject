@@ -22,7 +22,6 @@ public class BankAccount {
     @NotNull
     @ManyToOne
     @JoinColumn(name="user_account_id")
-    @Column(name = "account_holder")
     private UserAccount accountHolder;
 
     @NotNull
@@ -33,9 +32,8 @@ public class BankAccount {
     @Column(name="banking_institution")
     private Bank associatedBankingInstitution;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "username", referencedColumnName = "id")
-    @NotNull
     private AccountCredentials credentials;
 
     public BankAccount() {

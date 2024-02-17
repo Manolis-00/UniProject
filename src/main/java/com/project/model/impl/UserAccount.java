@@ -19,6 +19,5 @@ public class UserAccount {
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "social_security_number")
-    @Column(name = "bank_user_details")
     private BankUserDetails bankUserDetails;
 }
