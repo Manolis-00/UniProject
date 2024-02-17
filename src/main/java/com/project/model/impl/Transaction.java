@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NonNull
 @Entity
 @Table(name = "transaction")
-public class TransactionImpl {
+public class Transaction {
 
     @Id
     @NonNull
@@ -50,9 +50,9 @@ public class TransactionImpl {
 
     @ManyToOne
     @JoinColumn(name = "debit_card_number")
-    private DebitCardImpl debitCard;
+    private DebitCard debitCard;
 
     @ManyToOne
     @JoinColumn(name = "credit_card_number")
-    private CreditCardImpl creditCard;
+    private CreditCard creditCard;
 }

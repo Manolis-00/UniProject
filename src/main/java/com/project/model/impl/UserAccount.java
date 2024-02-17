@@ -12,7 +12,6 @@ import lombok.Setter;
 public class UserAccount {
 
     @Id
-    @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_account_id")
     private Long userAccountId;

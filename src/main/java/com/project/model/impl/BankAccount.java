@@ -68,6 +68,6 @@ public class BankAccount {
     }
 
     public void closeAccount() {
-        // Remove the account from the table.
+        //TODO - Remove the account from the table, and from the associated tables.
     }
 }

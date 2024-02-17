@@ -2,7 +2,7 @@ package com.project.model.def;
 
 import com.project.model.enums.Bank;
 import com.project.model.enums.PaymentProcessingNetwork;
-import com.project.model.impl.TransactionImpl;
+import com.project.model.impl.Transaction;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -41,8 +41,8 @@ public interface Card {
 
     void setCardPINCode(Integer cardPINCode);
 
-    Set<TransactionImpl> getCardTransactionHistory();
+    Set<Transaction> getCardTransactionHistory();
 
-    void setCardTransactionHistory(Set<TransactionImpl> cardTransactionHistory);
+    void setCardTransactionHistory(Set<Transaction> cardTransactionHistory);
 
 }

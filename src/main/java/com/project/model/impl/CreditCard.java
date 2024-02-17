@@ -16,7 +16,7 @@ import java.util.Set;
 @Setter
 @Entity
 @Table(name="credit_cards")
-public class CreditCardImpl implements Card {
+public class CreditCard implements Card {
 
     @Id
     @NonNull
@@ -57,7 +57,7 @@ public class CreditCardImpl implements Card {
 
     @NonNull
     @ManyToMany(mappedBy = "transactionId")
-    private Set<TransactionImpl> cardTransactionHistory;
+    private Set<Transaction> cardTransactionHistory;
 
     @NonNull
     @Column(name = "credit_score")
