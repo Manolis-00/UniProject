@@ -1,5 +1,6 @@
 package com.project.model.impl;
 
+import com.project.model.enums.UserRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -42,4 +43,8 @@ public class BankUserDetails {
     @NotNull
     @Column(name = "has_active_bank_account")
     private Boolean hasActiveBankAccount;
+
+    @NotNull
+    @Column(name = "user_role")
+    private UserRole userRole;
 }
