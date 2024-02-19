@@ -1,10 +1,7 @@
 package com.project.model.user;
 
 import com.project.model.impl.AccountCredentials;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
@@ -44,5 +41,8 @@ public class User {
     @Column(name = "user_role")
     private UserRole userRole;
 
+    @Column(name = "account_credentials", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "username")
     private AccountCredentials accountCredentials;
 }
