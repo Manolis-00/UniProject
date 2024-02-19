@@ -1,6 +1,6 @@
-package com.project.model.impl;
+package com.project.model.user;
 
-import com.project.model.enums.UserRole;
+import com.project.model.impl.AccountCredentials;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -12,8 +12,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="bank_user_details")
-public class BankUserDetails {
+@Table(name="user")
+public class User {
 
     @Id
     @NotNull
@@ -38,13 +38,11 @@ public class BankUserDetails {
 
     @NotNull
     @Column(name = "address")
-    private String address;
-
-    @NotNull
-    @Column(name = "has_active_bank_account")
-    private Boolean hasActiveBankAccount;
+    private String address; //TODO make an addressId class.
 
     @NotNull
     @Column(name = "user_role")
     private UserRole userRole;
+
+    private AccountCredentials accountCredentials;
 }
