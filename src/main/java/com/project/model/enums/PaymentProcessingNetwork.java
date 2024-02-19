@@ -5,25 +5,16 @@ import lombok.Getter;
 @Getter
 public enum PaymentProcessingNetwork {
 
-    VISA("Visa"),
-
-    MASTER_CARD("MasterCard"),
-
-    AMERICAN_EXPRESS("American Express"),
-
-    DISCOVER("Discover"),
-
-    INTERLINK("Interlink"),
-
-    STAR("STAR"),
-
     ACCEL("Accel"),
-
+    AMERICAN_EXPRESS("American Express"),
+    DISCOVER("Discover"),
     INTERAC("Interac"),
-
+    INTERLINK("Interlink"),
+    JCB("Japan Credit Bureau"),
+    MASTER_CARD("MasterCard"),
     PULSE("Pulse"),
-
-    JCB("Japan Credit Bureau");
+    STAR("STAR"),
+    VISA("Visa");
 
     final String processingNetworkDescription;
 

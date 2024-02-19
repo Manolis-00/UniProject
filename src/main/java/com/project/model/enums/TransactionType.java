@@ -8,18 +8,12 @@ import java.math.BigDecimal;
 public enum TransactionType {
 
     DEPOSIT(new BigDecimal("0.0")),
-
-    WITHDRAWAL_FROM_SAME_BANK(new BigDecimal("0.0")),
-
-    WITHDRAWAL_FROM_OTHER_BANK(new BigDecimal("0.5")),
-
-    TRANSFER(new BigDecimal("0.5")),
-
     INTEREST(new BigDecimal("0.0")),
-
+    PENALTY(new BigDecimal("1.0")),
     SERVICE_CHARGE(new BigDecimal("0.1")),
-
-    PENALTY(new BigDecimal("1.0"));
+    TRANSFER(new BigDecimal("0.5")),
+    WITHDRAWAL_FROM_OTHER_BANK(new BigDecimal("0.5")),
+    WITHDRAWAL_FROM_SAME_BANK(new BigDecimal("0.0"));
 
     private final BigDecimal bankTransactionFee;
 
