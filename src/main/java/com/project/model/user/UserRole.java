@@ -1,4 +1,4 @@
-package com.project.model.enums;
+package com.project.model.user;
 
 public enum UserRole {
 
