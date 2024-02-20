@@ -30,12 +30,15 @@ public class Telephone {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
+    @Column(name = "id")
     private UUID id;
 
     @Size(max =  15, message = "The telephone number must be at most 15 characters")
+    @Column(name = "number", nullable = false)
     private String number;
 
     @Size(max =  50, message = "The type must not exceed 50 characters")
+    @Column(name = "type", nullable = false)
     private String type;
 
     @CreatedBy
