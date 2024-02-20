@@ -56,12 +56,12 @@ public class Transaction {
     private String receiverAccountNumber;
 
     @ManyToOne
-    @JoinColumn(name = "debit_card_number")
-    private DebitCard debitCard;
+    @JoinColumn(name = "card_number")
+    private Card debitCard;
 
     @ManyToOne
-    @JoinColumn(name = "credit_card_number")
-    private CreditCard creditCard;
+    @JoinColumn(name = "card_number")
+    private Card creditCard;
 
     @CreatedBy
     @Column(name = "created_by")

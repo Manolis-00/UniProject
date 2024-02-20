@@ -1,8 +1,6 @@
 package com.project.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,12 +37,12 @@ public class CreditHistory {
     private Integer totalInquiries;
 
     @OneToMany
-    @JoinColumn(name = "credit_card_number")
-    private List<CreditCard> functionalCreditCards;
+    @JoinColumn(name = "card_number")
+    private List<Card> functionalCreditCards;
 
     @OneToMany
-    @JoinColumn(name = "credit_card_number")
-    private List<CreditCard> closedCreditCards;
+    @JoinColumn(name = "card_number")
+    private List<Card> closedCreditCards;
 
     @CreatedBy
     @Column(name = "created_by")
