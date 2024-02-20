@@ -1,9 +1,9 @@
 package com.project.model.user;
 
-import com.project.model.impl.AccountCredentials;
-import com.project.model.impl.Address;
+import com.project.model.AccountCredentials;
+import com.project.model.Address;
+import com.project.model.Telephone;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,13 +23,12 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name="user")
+@Table(name="users")
 @EntityListeners(AuditingEntityListener.class)
 public class User {
 
     @Id
-    @NotNull
-    @Column(name="social_security_number")
+    @Column(name="social_security_number", nullable = false)
     private String socialSecurityNumber;
 
     @Size(min = 1, max = 255, message = "The first name must not be null or empty and must be at most 255 characters.")
@@ -44,16 +43,15 @@ public class User {
     @Column(name="email", nullable = false)
     private String email;
 
-    @Size(min = 10, max = 10, message = "Phone number must have precisely 10 digits.")
-    @Column(name="phone_number", nullable = false)
-    private Long phoneNumber;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    private Set<Telephone> phoneNumber;
 
     @OneToMany
     @JoinColumn(name="address_id")
     @Column(name = "address", nullable = false)
     private Set<Address> addresses;
 
-    @NotNull
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
 
