@@ -5,7 +5,7 @@ import org.hibernate.id.IdentifierGenerator;
 
 import java.util.UUID;
 
-public class UUIDGenerator implements IdentifierGenerator {
+public class UUIDGenerator implements IdentifierGenerator { //TODO - Probably redundant
 
     @Override
     public Object generate(SharedSessionContractImplementor sharedSessionContractImplementor, Object o) {
