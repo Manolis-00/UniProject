@@ -14,7 +14,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @AllArgsConstructor
@@ -22,9 +22,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name="credit_history")
+@Table(name="card_history")
 @EntityListeners(AuditingEntityListener.class)
-public class CreditHistory {
+public class CardHistory {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -37,12 +37,12 @@ public class CreditHistory {
     private Integer totalInquiries;
 
     @OneToMany
-    @JoinColumn(name = "card_number")
-    private List<Card> functionalCreditCards;
+    @JoinColumn(name = "functional_cards")
+    private Set<Card> functionalCards;
 
     @OneToMany
-    @JoinColumn(name = "card_number")
-    private List<Card> closedCreditCards;
+    @JoinColumn(name = "closed_cards")
+    private Set<Card> closedCards;
 
     @CreatedBy
     @Column(name = "created_by")

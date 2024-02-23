@@ -77,6 +77,9 @@ public class Card {
     @Column(name="bank_account")
     private String respectiveBankAccountNumber; //TODO - Only for debitCards.
 
+    @OneToOne
+    private CardHistory cardHistory;
+
     @CreatedBy
     @Column(name = "created_by")
     private String createdBy;

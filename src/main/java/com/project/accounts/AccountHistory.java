@@ -1,11 +1,8 @@
-package com.project.model.bank;
+package com.project.accounts;
 
-import com.project.accounts.Account;
-import com.project.model.Address;
-import com.project.model.Telephone;
+import com.project.model.Card;
+import com.project.model.Transaction;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,12 +20,12 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "banks")
+@Table(name="account_history")
 @EntityListeners(AuditingEntityListener.class)
-public class Bank {
+public class AccountHistory {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -36,40 +33,23 @@ public class Bank {
     @Column(name = "id")
     private UUID id;
 
-    @Size(max =  255, message = "Name cannot exceed 255 characters")
-    @Column(name = "name", nullable = false)
-    private String name;
+    @OneToMany
+    @JoinColumn(name="id")
+    private Set<Transaction> transactions;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToMany
     @JoinColumn(name = "id")
-    private Address address;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Set<Telephone> phoneNumber;
-
-    @Email()
-    @Size(max = 255, message = "Email cannot exceed 255 characters")
-    @Column(name = "email")
-    private String email;
+    private Set<Card> cards;
 
     @CreatedBy
-    @Column(name = "created_by")
     private String createdBy;
 
     @CreatedDate
-    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
     @LastModifiedBy
-    @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
     @LastModifiedDate
-    @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
-
-    @ManyToMany
-    @JoinColumn(name = "account_number")
-    private Set<Account> accounts;
 }

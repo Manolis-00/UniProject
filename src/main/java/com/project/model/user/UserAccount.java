@@ -11,7 +11,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name="user_account")
+@Table(name="user_accounts")
 public class UserAccount {
 
     @Id
