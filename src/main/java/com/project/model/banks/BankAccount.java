@@ -1,8 +1,8 @@
-package com.project.accounts;
+package com.project.model.banks;
 
-import com.project.model.Card;
-import com.project.model.bank.Bank;
-import com.project.model.user.UserAccount;
+import com.project.model.accounts.AccountHistory;
+import com.project.model.cards.Card;
+import com.project.model.users.UserAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -20,6 +20,9 @@ import java.time.LocalDateTime;
 import java.util.Set;
 
 
+/**
+ * This class, specifies the entity of the Bank BankAccount that a user of the Bank might have.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -27,13 +30,12 @@ import java.util.Set;
 @Entity
 @Table(name="bank_accounts")
 @EntityListeners(AuditingEntityListener.class)
-public class Account {
+public class BankAccount {
 
     @Id
     @Column(name="account_number", nullable = false)
     private String accountNumber;                       //TODO - Hash it during service-repository
 
-    @NotNull
     @ManyToOne
     @JoinColumn(name="user_account_id", nullable = false)
     private UserAccount accountHolder;
@@ -41,10 +43,10 @@ public class Account {
     @Column(name = "balance", nullable = false)
     private BigDecimal balance;
 
-    @NotNull
     @ManyToMany
     @JoinColumn(name = "id")
-    private Set<Bank> associatedBankingInstitution; //TODO will change along with Bank
+    @NotNull
+    private Set<Bank> associatedBankingInstitution;
 
     @OneToOne
     @JoinColumn(name = "card_number")

@@ -1,8 +1,9 @@
-package com.project.model;
+package com.project.model.cards;
 
-import com.project.model.bank.Bank;
+import com.project.model.Transaction;
+import com.project.model.banks.Bank;
 import com.project.model.enums.PaymentProcessingNetwork;
-import com.project.model.user.User;
+import com.project.model.users.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -46,6 +47,7 @@ public class Card {
     @Column(name="valid_thru_date", nullable = false)
     private LocalDate validThruDate;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "card_payment_processing_network", nullable = false)
     private PaymentProcessingNetwork cardPaymentProcessingNetwork;
 

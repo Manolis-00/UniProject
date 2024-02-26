@@ -1,6 +1,10 @@
-package com.project.model;
+package com.project.model.banks;
 
+import com.project.model.Address;
+import com.project.model.Telephone;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,14 +21,17 @@ import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.UUID;
 
+/**
+ * The Bank entity.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name="card_history")
+@Table(name = "banks")
 @EntityListeners(AuditingEntityListener.class)
-public class CardHistory {
+public class Bank {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -32,17 +39,24 @@ public class CardHistory {
     @Column(name = "id")
     private UUID id;
 
-    @Size
-    @Column(name = "credit_inquiries")
-    private Integer totalInquiries;
+    @Size(max =  255, message = "Name cannot exceed 255 characters")
+    @Column(name = "name", nullable = false)
+    private String name;
 
-    @OneToMany
-    @JoinColumn(name = "functional_cards")
-    private Set<Card> functionalCards;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    @NotNull
+    private Address address;
 
-    @OneToMany
-    @JoinColumn(name = "closed_cards")
-    private Set<Card> closedCards;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "id")
+    @NotNull
+    private Set<Telephone> phoneNumber;
+
+    @Email()
+    @Size(max = 255, message = "Email cannot exceed 255 characters")
+    @Column(name = "email")
+    private String email;
 
     @CreatedBy
     @Column(name = "created_by")
@@ -59,4 +73,8 @@ public class CardHistory {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
+
+    @ManyToMany
+    @JoinColumn(name = "account_number")
+    private Set<BankAccount> accounts;
 }

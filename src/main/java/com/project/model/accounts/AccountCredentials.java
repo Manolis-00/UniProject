@@ -1,16 +1,12 @@
-package com.project.model.bank;
+package com.project.model.accounts;
 
-import com.project.accounts.Account;
-import com.project.model.Address;
-import com.project.model.Telephone;
+
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.UuidGenerator;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
@@ -18,40 +14,24 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.Set;
-import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Setter
 @Getter
+@Setter
 @Entity
-@Table(name = "banks")
+@Table(name = "account_credentials")
 @EntityListeners(AuditingEntityListener.class)
-public class Bank {
+public class AccountCredentials {
 
     @Id
-    @GeneratedValue(generator = "UUID")
-    @UuidGenerator(style = UuidGenerator.Style.AUTO)
-    @Column(name = "id")
-    private UUID id;
-
     @Size(max =  255, message = "Name cannot exceed 255 characters")
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "username", nullable = false)
+    private String username;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Address address;
-
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    private Set<Telephone> phoneNumber;
-
-    @Email()
-    @Size(max = 255, message = "Email cannot exceed 255 characters")
-    @Column(name = "email")
-    private String email;
+    @Size(max =  255, message = "Password cannot exceed 255 characters")
+    @Column(name = "password", nullable = false)
+    private String password;
 
     @CreatedBy
     @Column(name = "created_by")
@@ -68,8 +48,4 @@ public class Bank {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
-
-    @ManyToMany
-    @JoinColumn(name = "account_number")
-    private Set<Account> accounts;
 }

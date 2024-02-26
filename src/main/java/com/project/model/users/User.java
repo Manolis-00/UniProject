@@ -1,9 +1,10 @@
-package com.project.model.user;
+package com.project.model.users;
 
-import com.project.model.AccountCredentials;
+import com.project.model.accounts.AccountCredentials;
 import com.project.model.Address;
 import com.project.model.Telephone;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,6 +19,9 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+/**
+ * The basic User entity. Specifies the general information of a person, who could potentially start a bank account, or get a Card.
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -45,11 +49,13 @@ public class User {
 
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "id")
+    @NotNull
     private Set<Telephone> phoneNumber;
 
     @OneToMany
     @JoinColumn(name="address_id")
     @Column(name = "address", nullable = false)
+    @NotNull
     private Set<Address> addresses;
 
     @Column(name = "user_role", nullable = false)

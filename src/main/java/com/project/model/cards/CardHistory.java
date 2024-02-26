@@ -1,8 +1,8 @@
-package com.project.accounts;
+package com.project.model.cards;
 
-import com.project.model.Card;
-import com.project.model.Transaction;
+import com.project.model.cards.Card;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,9 +23,9 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name="account_history")
+@Table(name="card_history")
 @EntityListeners(AuditingEntityListener.class)
-public class AccountHistory {
+public class CardHistory {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -33,23 +33,31 @@ public class AccountHistory {
     @Column(name = "id")
     private UUID id;
 
-    @OneToMany
-    @JoinColumn(name="id")
-    private Set<Transaction> transactions;
+    @Size
+    @Column(name = "credit_inquiries")
+    private Integer totalInquiries;
 
     @OneToMany
-    @JoinColumn(name = "id")
-    private Set<Card> cards;
+    @JoinColumn(name = "functional_cards")
+    private Set<Card> functionalCards;
+
+    @OneToMany
+    @JoinColumn(name = "closed_cards")
+    private Set<Card> closedCards;
 
     @CreatedBy
+    @Column(name = "created_by")
     private String createdBy;
 
     @CreatedDate
+    @Column(name = "created_date")
     private LocalDateTime createdDate;
 
     @LastModifiedBy
+    @Column(name = "last_modified_by")
     private String lastModifiedBy;
 
     @LastModifiedDate
+    @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 }

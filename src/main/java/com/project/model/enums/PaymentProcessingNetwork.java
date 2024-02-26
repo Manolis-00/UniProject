@@ -2,6 +2,9 @@ package com.project.model.enums;
 
 import lombok.Getter;
 
+/**
+ * An enum of the available processing networks
+ */
 @Getter
 public enum PaymentProcessingNetwork {
 
