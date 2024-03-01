@@ -47,6 +47,10 @@ public class UserAccount {
     @Column(name = "balance", nullable = false)
     private BigDecimal balance;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_account_history_id", referencedColumnName = "id")
+    private UserAccountHistory userAccountHistory;
+
     @ManyToMany
     @JoinColumn(name = "id")
     @NotNull

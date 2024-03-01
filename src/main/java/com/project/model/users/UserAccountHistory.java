@@ -36,10 +36,6 @@ public class UserAccountHistory {
     @Column(name = "id")
     private UUID id;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_account_id", referencedColumnName = "account_number")
-    private UserAccount userAccount;
-
     @OneToMany
     @JoinColumn(name="id")
     private Set<Transaction> transactions;
