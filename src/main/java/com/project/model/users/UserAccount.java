@@ -1,10 +1,7 @@
 package com.project.model.users;
 
-import com.project.model.accounts.AccountHistory;
 import com.project.model.banks.Bank;
 import com.project.model.cards.Card;
-import com.project.model.users.User;
-import com.project.model.users.UserAccountStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -23,16 +20,16 @@ import java.util.Set;
 
 
 /**
- * This class, specifies the entity of the Bank UserBankAccount that a user of the Bank might have.
+ * This class, specifies the entity of the Bank UserAccount that a user of the Bank might have.
  */
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 @Entity
-@Table(name="bank_accounts")
+@Table(name="user_accounts")
 @EntityListeners(AuditingEntityListener.class)
-public class UserBankAccount {
+public class UserAccount {
 
     @Id
     @Column(name="account_number", nullable = false)
@@ -59,10 +56,6 @@ public class UserBankAccount {
     @JoinColumn(name = "card_number")
     @Column(name = "card", nullable = false)
     private Card card;
-
-    @OneToOne
-    @PrimaryKeyJoinColumn(name = "id")
-    private AccountHistory accountHistory;
 
     @CreatedBy
     @Column(name = "created_by")

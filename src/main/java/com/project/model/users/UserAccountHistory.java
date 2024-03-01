@@ -1,4 +1,4 @@
-package com.project.model.accounts;
+package com.project.model.users;
 
 import com.project.model.cards.Card;
 import com.project.model.Transaction;
@@ -19,7 +19,7 @@ import java.util.Set;
 import java.util.UUID;
 
 /**
- * Specifies the entity of the AccountHistory that a BankAccount could have.
+ * Specifies the entity of the UserAccountHistory that a UserAccount could have.
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -28,13 +28,17 @@ import java.util.UUID;
 @Entity
 @Table(name="account_history")
 @EntityListeners(AuditingEntityListener.class)
-public class AccountHistory {
+public class UserAccountHistory {
 
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
     @Column(name = "id")
     private UUID id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_account_id", referencedColumnName = "account_number")
+    private UserAccount userAccount;
 
     @OneToMany
     @JoinColumn(name="id")
