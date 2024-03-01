@@ -1,6 +1,5 @@
 package com.project.model.users;
 
-import com.project.model.Transaction;
 import com.project.model.banks.Bank;
 import com.project.model.cards.Card;
 import jakarta.persistence.*;

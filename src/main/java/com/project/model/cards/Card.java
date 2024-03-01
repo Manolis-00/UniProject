@@ -55,7 +55,7 @@ public class Card {
     @JoinColumn(name = "card_history_id", referencedColumnName = "id")
     private CardHistory cardHistory;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id")
     private Bank cardBank;
 

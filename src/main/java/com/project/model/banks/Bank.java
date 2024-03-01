@@ -2,6 +2,7 @@ package com.project.model.banks;
 
 import com.project.model.Address;
 import com.project.model.Telephone;
+import com.project.model.cards.Card;
 import com.project.model.users.UserAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
@@ -51,6 +52,9 @@ public class Bank {
     @NotNull
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
     private Set<Telephone> telephones;
+
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Card> cards;
 
     @Email()
     @Size(max = 255, message = "Email cannot exceed 255 characters")
