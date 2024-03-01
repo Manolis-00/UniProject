@@ -2,6 +2,7 @@ package com.project.model;
 
 import com.project.model.cards.Card;
 import com.project.model.enums.TransactionType;
+import com.project.model.users.UserAccountHistory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -33,9 +34,13 @@ public class Transaction {
     @Column(name = "id")
     private UUID id;
 
-    @Size(max =  16, message = "BankAccount number cannot exceed 255 characters")
+    @Size(max =  16, message = "UserAccount number cannot exceed 255 characters")
     @Column(name = "account_number", nullable = false)
     private String accountNumber;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private UserAccountHistory userAccountHistory;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type", nullable = false)
@@ -53,9 +58,9 @@ public class Transaction {
     @Column(name = "balance_after_transaction", nullable = false)
     private BigDecimal balanceAfterTransaction;
 
-    @Size(max =  16, message = "BankAccount number cannot exceed 255 characters")
+    @Size(max =  16, message = "UserAccount number cannot exceed 255 characters")
     @Column(name = "receiver_account_number", nullable = false)
-    private String receiverAccountNumber;      //TODO - There is a chance that the String will be replaced by the BankAccount.
+    private String receiverAccountNumber;      //TODO - There is a chance that the String will be replaced by the UserAccount.
 
     @ManyToOne
     @JoinColumn(name = "card_number")

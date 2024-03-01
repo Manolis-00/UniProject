@@ -36,8 +36,7 @@ public class UserAccountHistory {
     @Column(name = "id")
     private UUID id;
 
-    @OneToMany
-    @JoinColumn(name="id")
+    @OneToMany(mappedBy = "userAccountHistory")
     private Set<Transaction> transactions;
 
     @OneToMany
