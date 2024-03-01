@@ -55,7 +55,7 @@ public class UserAccount {
     @NotNull
     private Set<Bank> associatedBankingInstitution;
 
-    @OneToMany(mappedBy = "userAccountHistory")
+    @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Card> cards;
 
     @NotNull

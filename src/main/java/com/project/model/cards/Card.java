@@ -32,7 +32,7 @@ public class Card {
     @Column(name="card_number", nullable = false)           //TODO - Hash it
     private Integer cardNumber;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_number")
     private UserAccount UserAccount;
 
