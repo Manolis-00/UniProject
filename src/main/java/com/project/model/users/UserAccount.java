@@ -60,6 +60,11 @@ public class UserAccount {
     @Column(name = "card", nullable = false)
     private Card card;
 
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "username")
+    private UserAccountCredentials userAccountCredentials;
+
     @CreatedBy
     @Column(name = "created_by")
     private String createdBy;

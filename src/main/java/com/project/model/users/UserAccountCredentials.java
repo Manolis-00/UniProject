@@ -1,4 +1,4 @@
-package com.project.model.accounts;
+package com.project.model.users;
 
 
 import jakarta.persistence.*;
@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "account_credentials")
 @EntityListeners(AuditingEntityListener.class)
-public class AccountCredentials {
+public class UserAccountCredentials {
 
     @Id
     @Size(max =  255, message = "Name cannot exceed 255 characters")
@@ -32,6 +32,9 @@ public class AccountCredentials {
     @Size(max =  255, message = "Password cannot exceed 255 characters")
     @Column(name = "password", nullable = false)
     private String password;
+
+    @OneToOne(mappedBy = "userAccountCredentials")
+    private UserAccount userAccount;
 
     @CreatedBy
     @Column(name = "created_by")
