@@ -1,8 +1,10 @@
-package com.project.model.banks;
+package com.project.model.users;
 
 import com.project.model.accounts.AccountHistory;
+import com.project.model.banks.Bank;
 import com.project.model.cards.Card;
-import com.project.model.users.UserAccount;
+import com.project.model.users.User;
+import com.project.model.users.UserAccountStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -21,7 +23,7 @@ import java.util.Set;
 
 
 /**
- * This class, specifies the entity of the Bank BankAccount that a user of the Bank might have.
+ * This class, specifies the entity of the Bank UserBankAccount that a user of the Bank might have.
  */
 @AllArgsConstructor
 @NoArgsConstructor
@@ -30,15 +32,20 @@ import java.util.Set;
 @Entity
 @Table(name="bank_accounts")
 @EntityListeners(AuditingEntityListener.class)
-public class BankAccount {
+public class UserBankAccount {
 
     @Id
     @Column(name="account_number", nullable = false)
     private String accountNumber;                       //TODO - Hash it during service-repository
 
-    @ManyToOne
-    @JoinColumn(name="user_account_id", nullable = false)
-    private UserAccount accountHolder;
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "social_security_number")
+    private User user;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name="user_account_status", nullable = false)
+    private UserAccountStatus userAccountStatus;
 
     @Column(name = "balance", nullable = false)
     private BigDecimal balance;
@@ -54,7 +61,7 @@ public class BankAccount {
     private Card card;
 
     @OneToOne
-    @Column(name = "account_history")
+    @PrimaryKeyJoinColumn(name = "id")
     private AccountHistory accountHistory;
 
     @CreatedBy
