@@ -35,8 +35,7 @@ public class UserAccount {
     @Column(name="account_number", nullable = false)
     private String accountNumber;                       //TODO - Hash it during service-repository
 
-    @NotNull
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "social_security_number")
     private User user;
 

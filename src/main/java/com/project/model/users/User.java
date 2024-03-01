@@ -1,6 +1,5 @@
 package com.project.model.users;
 
-import com.project.model.accounts.AccountCredentials;
 import com.project.model.Address;
 import com.project.model.Telephone;
 import jakarta.persistence.*;
@@ -61,10 +60,8 @@ public class User {
     @Column(name = "user_role", nullable = false)
     private UserRole userRole;
 
-    @Column(name = "account_credentials", nullable = false)
-    @OneToOne
-    @JoinColumn(name = "username", nullable = false)
-    private AccountCredentials accountCredentials;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<UserAccount> userAccounts;
 
     @CreatedBy
     private String createdBy;
