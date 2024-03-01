@@ -1,5 +1,6 @@
 package com.project.model.users;
 
+import com.project.model.Transaction;
 import com.project.model.banks.Bank;
 import com.project.model.cards.Card;
 import jakarta.persistence.*;
@@ -17,7 +18,6 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Set;
-
 
 /**
  * This class, specifies the entity of the Bank UserAccount that a user of the Bank might have.
@@ -55,10 +55,8 @@ public class UserAccount {
     @NotNull
     private Set<Bank> associatedBankingInstitution;
 
-    @OneToOne
-    @JoinColumn(name = "card_number")
-    @Column(name = "card", nullable = false)
-    private Card card;
+    @OneToMany(mappedBy = "userAccountHistory")
+    private Set<Card> cards;
 
     @NotNull
     @OneToOne(cascade = CascadeType.ALL)

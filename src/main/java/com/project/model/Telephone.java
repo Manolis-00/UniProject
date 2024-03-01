@@ -1,5 +1,7 @@
 package com.project.model;
 
+import com.project.model.banks.Bank;
+import com.project.model.users.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -38,6 +40,14 @@ public class Telephone {
     @Size(max =  50, message = "The type must not exceed 50 characters")
     @Column(name = "type", nullable = false)
     private String type;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Bank bank;
+
+    @ManyToOne
+    @JoinColumn(name = "social_security_number")
+    private User user;
 
     @CreatedBy
     @Column(name = "created_by")

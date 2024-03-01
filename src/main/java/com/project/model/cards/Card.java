@@ -2,8 +2,8 @@ package com.project.model.cards;
 
 import com.project.model.Transaction;
 import com.project.model.banks.Bank;
+import com.project.model.users.UserAccount;
 import com.project.model.enums.PaymentProcessingNetwork;
-import com.project.model.users.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
@@ -32,6 +32,10 @@ public class Card {
     @Column(name="card_number", nullable = false)           //TODO - Hash it
     private Integer cardNumber;
 
+    @ManyToOne
+    @JoinColumn(name = "account_number")
+    private UserAccount UserAccount;
+
     @Size(min = 3, max = 3, message = "Security code must be exactly 3 characters")
     @Column(name="security_code", nullable = false)         //TODO - Hash it
     private Integer securityCode;
@@ -40,16 +44,16 @@ public class Card {
     @Column(name = "card_pin_code", nullable = false)       //TODO - Hash it
     private Integer cardPINCode;
 
-    @ManyToOne
-    @JoinColumn(name = "social_security_number")
-    private User ownerName;
-
     @Column(name="valid_thru_date", nullable = false)
     private LocalDate validThruDate;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "card_payment_processing_network", nullable = false)
     private PaymentProcessingNetwork cardPaymentProcessingNetwork;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "card_history_id", referencedColumnName = "id")
+    private CardHistory cardHistory;
 
     @ManyToOne
     @JoinColumn(name = "id")
@@ -78,9 +82,6 @@ public class Card {
 
     @Column(name="bank_account")
     private String respectiveBankAccountNumber; //TODO - Only for debitCards.
-
-    @OneToOne
-    private CardHistory cardHistory;
 
     @CreatedBy
     @Column(name = "created_by")

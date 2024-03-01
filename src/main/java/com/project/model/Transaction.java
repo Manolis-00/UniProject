@@ -1,6 +1,7 @@
 package com.project.model;
 
 import com.project.model.cards.Card;
+import com.project.model.cards.CardHistory;
 import com.project.model.enums.TransactionType;
 import com.project.model.users.UserAccountHistory;
 import jakarta.persistence.*;
@@ -41,6 +42,10 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "id")
     private UserAccountHistory userAccountHistory;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private CardHistory cardHistory;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "transaction_type", nullable = false)

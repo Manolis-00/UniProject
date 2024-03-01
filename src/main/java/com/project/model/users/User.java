@@ -46,15 +46,12 @@ public class User {
     @Column(name="email", nullable = false)
     private String email;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
     @NotNull
-    private Set<Telephone> phoneNumber;
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
+    private Set<Telephone> telephones;
 
-    @OneToMany
-    @JoinColumn(name="address_id")
-    @Column(name = "address", nullable = false)
     @NotNull
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Address> addresses;
 
     @Column(name = "user_role", nullable = false)

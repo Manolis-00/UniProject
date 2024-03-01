@@ -1,5 +1,6 @@
 package com.project.model.cards;
 
+import com.project.model.Transaction;
 import com.project.model.cards.Card;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
@@ -33,9 +34,8 @@ public class CardHistory {
     @Column(name = "id")
     private UUID id;
 
-    @Size
-    @Column(name = "credit_inquiries")
-    private Integer totalInquiries;
+    @OneToMany(mappedBy = "cardHistory")
+    private Set<Transaction> transactions;
 
     @OneToMany
     @JoinColumn(name = "functional_cards")

@@ -39,10 +39,6 @@ public class UserAccountHistory {
     @OneToMany(mappedBy = "userAccountHistory")
     private Set<Transaction> transactions;
 
-    @OneToMany
-    @JoinColumn(name = "id")
-    private Set<Card> cards;
-
     @CreatedBy
     private String createdBy;
 

@@ -1,5 +1,7 @@
 package com.project.model;
 
+import com.project.model.banks.Bank;
+import com.project.model.users.User;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -50,6 +52,14 @@ public class Address {
     @Size(min = 5, max =  10, message = "Postal code must be between 5 and 10 characters")
     @Column(name = "postalcode", nullable = false)
     private String postalCode;
+
+    @ManyToOne
+    @JoinColumn(name = "id")
+    private Bank bank;
+
+    @ManyToOne
+    @JoinColumn(name = "social_security_number")
+    private User user;
 
     @CreatedBy
     @Column(name = "created_by")

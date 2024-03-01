@@ -2,6 +2,7 @@ package com.project.model.banks;
 
 import com.project.model.Address;
 import com.project.model.Telephone;
+import com.project.model.users.UserAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
@@ -43,20 +44,26 @@ public class Bank {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
     @NotNull
-    private Address address;
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
+    private Set<Address> addresses;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
     @NotNull
-    private Set<Telephone> phoneNumber;
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
+    private Set<Telephone> telephones;
 
     @Email()
     @Size(max = 255, message = "Email cannot exceed 255 characters")
     @Column(name = "email")
     private String email;
+
+    @ManyToMany
+    @JoinTable(
+            name = "bank_accounts",
+            joinColumns =  @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "account_number")
+    )
+    private Set<UserAccount> accounts;
 
     @CreatedBy
     @Column(name = "created_by")
@@ -73,8 +80,4 @@ public class Bank {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
-
-    @ManyToMany
-    @JoinColumn(name = "account_number")
-    private Set<BankAccount> accounts;
 }
