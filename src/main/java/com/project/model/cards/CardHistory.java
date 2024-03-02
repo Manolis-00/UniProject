@@ -31,8 +31,8 @@ public class CardHistory {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    @Column(name = "card_history_id")
+    private UUID cardHistoryId;
 
     @OneToMany(mappedBy = "cardHistory")
     private Set<Transaction> transactions;

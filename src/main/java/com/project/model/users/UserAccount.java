@@ -46,13 +46,12 @@ public class UserAccount {
     private BigDecimal balance;
 
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_account_history_id", referencedColumnName = "id")
+    @JoinColumn(name = "user_account_history_id", referencedColumnName = "user_account_history_id")
     private UserAccountHistory userAccountHistory;
 
-    @ManyToMany
-    @JoinColumn(name = "id")
-    @NotNull
-    private Set<Bank> associatedBankingInstitution;
+    @ManyToOne
+    @JoinColumn(name = "bank_id")
+    private Bank bank;
 
     @OneToMany(mappedBy = "userAccount", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Card> cards;

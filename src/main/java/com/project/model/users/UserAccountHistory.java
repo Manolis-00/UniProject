@@ -33,8 +33,8 @@ public class UserAccountHistory {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    @Column(name = "user_account_history_id")
+    private UUID userAccountHistoryId;
 
     @OneToMany(mappedBy = "userAccountHistory")
     private Set<Transaction> transactions;

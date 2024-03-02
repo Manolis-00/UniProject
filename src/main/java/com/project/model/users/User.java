@@ -47,7 +47,7 @@ public class User {
     private String email;
 
     @NotNull
-    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Telephone> telephones;
 
     @NotNull

@@ -38,8 +38,8 @@ public class Bank {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    @Column(name = "bank_id")
+    private UUID bankId;
 
     @Size(max =  255, message = "Name cannot exceed 255 characters")
     @Column(name = "name", nullable = false)
@@ -53,7 +53,7 @@ public class Bank {
     @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
     private Set<Telephone> telephones;
 
-    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cardBank", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Card> cards;
 
     @Email()
@@ -61,12 +61,7 @@ public class Bank {
     @Column(name = "email")
     private String email;
 
-    @ManyToMany
-    @JoinTable(
-            name = "bank_accounts",
-            joinColumns =  @JoinColumn(name = "id"),
-            inverseJoinColumns = @JoinColumn(name = "account_number")
-    )
+    @OneToMany(mappedBy = "bank", cascade = CascadeType.ALL)
     private Set<UserAccount> accounts;
 
     @CreatedBy

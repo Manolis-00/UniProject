@@ -34,7 +34,7 @@ public class Card {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "account_number")
-    private UserAccount UserAccount;
+    private UserAccount userAccount;
 
     @Size(min = 3, max = 3, message = "Security code must be exactly 3 characters")
     @Column(name="security_code", nullable = false)         //TODO - Hash it
@@ -51,8 +51,12 @@ public class Card {
     @Column(name = "card_payment_processing_network", nullable = false)
     private PaymentProcessingNetwork cardPaymentProcessingNetwork;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "card_type", nullable = false)
+    private CardType cardType;
+
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "card_history_id", referencedColumnName = "id")
+    @JoinColumn(name = "card_history_id", referencedColumnName = "card_history_id")
     private CardHistory cardHistory;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -64,9 +68,6 @@ public class Card {
 
     @Column(name="card_daily_withdrawal_amount_limit", nullable = false)
     private BigDecimal cardDailyWithdrawalAmountLimit;
-
-    @ManyToMany(mappedBy = "id")
-    private Set<Transaction> cardTransactionHistory;
 
     @Column(name = "credit_score")        //TODO - Validator must be set on the services, to determine whether it is credit or debit card.
     private BigDecimal creditScore;

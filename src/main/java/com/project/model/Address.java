@@ -30,8 +30,8 @@ public class Address {
     @Id
     @GeneratedValue(generator = "UUID")
     @UuidGenerator(style = UuidGenerator.Style.AUTO)
-    @Column(name = "id")
-    private UUID id;
+    @Column(name = "address_id")
+    private UUID addressId;
 
     @Size(max =  255, message = "Street must be at most  255 characters")
     @Column(name = "street")
@@ -54,7 +54,7 @@ public class Address {
     private String postalCode;
 
     @ManyToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "bank_id")
     private Bank bank;
 
     @ManyToOne
