@@ -1,0 +1,19 @@
+spring:
+  # Security
+  security:
+    user:
+      name: manolis
+      password: 12345
+  # Datasource
+  datasource:
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+    url: jdbc:h2:file:./data/bankDatabase
+  sql:
+    init:
+      mode: always
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
