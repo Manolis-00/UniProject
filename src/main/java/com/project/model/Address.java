@@ -1,7 +1,7 @@
 package com.project.model;
 
 import com.project.model.banks.Bank;
-import com.project.model.users.User;
+import com.project.model.users.UserAccount;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -57,9 +57,9 @@ public class Address {
     @JoinColumn(name = "bank_id")
     private Bank bank;
 
-    @ManyToOne
-    @JoinColumn(name = "social_security_number")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "account_number")
+    private UserAccount userAccount;
 
     @CreatedBy
     @Column(name = "created_by")

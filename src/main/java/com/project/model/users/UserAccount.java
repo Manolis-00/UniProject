@@ -1,9 +1,12 @@
 package com.project.model.users;
 
+import com.project.model.Address;
+import com.project.model.Telephone;
 import com.project.model.banks.Bank;
 import com.project.model.cards.Card;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -34,9 +37,33 @@ public class UserAccount {
     @Column(name="account_number", nullable = false)
     private String accountNumber;                       //TODO - Hash it during service-repository
 
-    @ManyToOne
-    @JoinColumn(name = "social_security_number")
-    private User user;
+    @Column(name="social_security_number", nullable = false)
+    private String socialSecurityNumber;
+
+    @Size(min = 1, max = 255, message = "The first name must not be null or empty and must be at most 255 characters.")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @Size(min = 1, max = 255, message = "Last name must not be null or empty, and must be at most 255 characters.")
+    @Column(name="lastName", nullable = false)
+    private String lastName;
+
+    @Size(min = 1, max = 255, message = "Email must not be null or empty, and must be at most 255 characters.")
+    @Column(name="email", nullable = false)
+    private String email;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "number", referencedColumnName = "telephone_id")
+    private Telephone telephone;
+
+    @NotNull
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address", referencedColumnName = "address_id")
+    private Address address;
+
+    @Column(name = "user_role", nullable = false)
+    private UserRole userRole;
 
     @Enumerated(EnumType.STRING)
     @Column(name="user_account_status", nullable = false)

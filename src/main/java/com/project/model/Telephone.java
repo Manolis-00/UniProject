@@ -1,7 +1,7 @@
 package com.project.model;
 
 import com.project.model.banks.Bank;
-import com.project.model.users.User;
+import com.project.model.users.UserAccount;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -33,6 +33,8 @@ public class Telephone {
     @Column(name = "telephone_id")
     private UUID telephoneId;
 
+    @Setter
+    @Getter
     @Size(max =  15, message = "The telephone number must be at most 15 characters")
     @Column(name = "number", nullable = false)
     private String number;
@@ -45,9 +47,9 @@ public class Telephone {
     @JoinColumn(name = "id")
     private Bank bank;
 
-    @ManyToOne
-    @JoinColumn(name = "social_security_number")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "account_number")
+    private UserAccount userAccount;
 
     @CreatedBy
     @Column(name = "created_by")
@@ -64,4 +66,5 @@ public class Telephone {
     @LastModifiedDate
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
+
 }
