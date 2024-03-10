@@ -23,8 +23,14 @@
     <!-- Telephone Fields -->
     <label for="telephoneNumber">Telephone Number:</label><br>
     <form:input path="telephone.number" required="required"/><br>
+
     <label for="telephoneType">Telephone Type:</label><br>
-    <form:input path="telephone.type" required="required"/><br>
+    <form:form modelAttribute="userAccount" method="post" action="registerUserAccount">
+        <form:select path="telephone.type">
+            <form:options items="${telephoneTypes}" />
+        </form:select><br>
+    </form:form>
+
     <!-- Address Fields -->
     <label for="street">Street:</label><br>
     <form:input path="address.street" required="required"/><br>
@@ -37,6 +43,7 @@
     <label for="postalCode">Postal Code:</label><br>
     <form:input path="address.postalCode" required="required"/><br>
     <!-- Additional UserAccount Fields -->
+
     <label for="userAccountStatus">Account Status:</label><br>
     <form:form modelAttribute="userAccount" method="post" action="registerUserAccount">
         <!-- Other form fields... -->
@@ -44,6 +51,8 @@
             <form:options items="${userAccountStatuses}" />
         </form:select><br>
     </form:form>
+
+
     <label for="balance">Balance:</label><br>
     <form:input path="balance" type="number" step="0.01" required="required"/><br>
     <label for="username">Username:</label><br>

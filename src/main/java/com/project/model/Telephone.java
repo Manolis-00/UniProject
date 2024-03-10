@@ -39,9 +39,9 @@ public class Telephone {
     @Column(name = "number", nullable = false)
     private String number;
 
-    @Size(max =  50, message = "The type must not exceed 50 characters")
+    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    private String type;
+    private TelephoneType type;
 
     @ManyToOne
     @JoinColumn(name = "id")

@@ -2,6 +2,7 @@ package com.project.controller;
 
 import com.project.model.Address;
 import com.project.model.Telephone;
+import com.project.model.TelephoneType;
 import com.project.model.users.UserAccount;
 import com.project.model.users.UserAccountStatus;
 import jakarta.validation.Valid;
@@ -25,6 +26,7 @@ public class UserAccountController {
         // Initialize Telephone and Address if necessary
         userAccount.setTelephone(new Telephone());
         userAccount.setAddress(new Address());
+        model.addAttribute("telephoneTypes", TelephoneType.values());
         model.addAttribute("userAccountStatuses", UserAccountStatus.values());
         model.addAttribute("userAccount", userAccount);
         return "registerUserAccount";
